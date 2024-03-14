@@ -1,4 +1,4 @@
-ARG ROSDISTRO=rolling
+ARG ROSDISTRO=humble
 FROM osrf/ros:${ROSDISTRO}-desktop
 ARG USERNAME=jbinney
 ARG USER_UID=1000

@@ -5,7 +5,7 @@
     "build": {
         "dockerfile": "Dockerfile",
         "args": {
-            "ROSDISTRO": "rolling",
+            "ROSDISTRO": "humble",
             "USERNAME": "jbinney"
         }
     },
@@ -35,9 +35,9 @@
     "mounts": [
        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
         "source=/dev/dri,target=/dev/dri,type=bind,consistency=cached",
-        "source=${localWorkspaceFolder}/../cache/rolling/build,target=/ws/build,type=bind",
-        "source=${localWorkspaceFolder}/../cache/rolling/install,target=/ws/install,type=bind",
-        "source=${localWorkspaceFolder}/../cache/rolling/log,target=/ws/log,type=bind",
+        "source=vscode-${devcontainerId}-build,target=/ws/build,type=volume",
+        "source=vscode-${devcontainerId}-install,target=/ws/install,type=volume",
+        "source=vscode-${devcontainerId}-log,target=/ws/log,type=volume",
         "source=/home/jbinney/.config/bloom,target=/home/jbinney/.config/bloom,type=bind"
     ],
     "postCreateCommand": "sudo rosdep update && sudo rosdep install --from-paths src --ignore-src -y && sudo chown -R $(whoami) /ws"
