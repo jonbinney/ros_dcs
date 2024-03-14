@@ -13,7 +13,7 @@
     "workspaceMount": "source=${localWorkspaceFolder},target=/ws/src,type=bind",
     "customizations": {
         "vscode": {
-            "extensions":[
+            "extensions": [
                 "ms-vscode.cpptools",
                 "ms-vscode.cpptools-themes",
                 "twxs.cmake",
@@ -30,10 +30,11 @@
     },
     "runArgs": [
         "--net=host",
-        "-e", "DISPLAY=${env:DISPLAY}"
+        "-e",
+        "DISPLAY=${env:DISPLAY}"
     ],
     "mounts": [
-       "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
+        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
         "source=/dev/dri,target=/dev/dri,type=bind,consistency=cached",
         "source=vscode-${devcontainerId}-build,target=/ws/build,type=volume",
         "source=vscode-${devcontainerId}-install,target=/ws/install,type=volume",
