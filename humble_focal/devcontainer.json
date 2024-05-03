@@ -1,0 +1,44 @@
+{
+    "name": "ROS 2 Development Container (Ubuntu Focal)",
+    "privileged": true,
+    "remoteUser": "jbinney",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {
+            "ROSDISTRO": "humble",
+            "USERNAME": "jbinney"
+        }
+    },
+    "workspaceFolder": "/ws",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/ws/src,type=bind",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.cpptools-themes",
+                "ms-vscode.cmake-tools",
+                "eamodio.gitlens"
+            ]
+        }
+    },
+    "containerEnv": {
+        "DISPLAY": "unix:0",
+        "ROS_LOCALHOST_ONLY": "1",
+        "ROS_DOMAIN_ID": "42"
+    },
+    "runArgs": [
+        "--net=host",
+        "-e",
+        "DISPLAY=${env:DISPLAY}"
+    ],
+    "mounts": [
+        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
+        "source=/dev/dri,target=/dev/dri,type=bind,consistency=cached",
+        "source=vscode-${devcontainerId}-build,target=/ws/build,type=volume",
+        "source=vscode-${devcontainerId}-install,target=/ws/install,type=volume",
+        "source=vscode-${devcontainerId}-log,target=/ws/log,type=volume",
+        "source=/home/jbinney/.config/bloom,target=/home/jbinney/.config/bloom,type=bind"
+    ],
+    "postCreateCommand": ". /opt/ros/humble/install/setup.sh && sudo rosdep update && sudo rosdep install --from-paths src --ignore-src -r -y && sudo chown -R $(whoami) /ws"
+}
+
