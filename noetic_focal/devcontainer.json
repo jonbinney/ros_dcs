@@ -1,0 +1,46 @@
+{
+    "name": "ROS Noetic on Ubuntu Focal",
+    "privileged": true,
+    "remoteUser": "jbinney",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {
+            "ROSDISTRO": "noetic",
+            "USERNAME": "jbinney"
+        }
+    },
+    "workspaceFolder": "/ws/src",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/ws/src,type=bind",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.cpptools-themes",
+                "ms-vscode.cmake-tools",
+                "eamodio.gitlens"
+            ]
+        }
+    },
+    "containerEnv": {
+        "DISPLAY": "unix:0",
+        "ROS_LOCALHOST_ONLY": "1",
+        "CMAKE_PREFIX_PATH": "/opt/ros/noetic",
+        "ROS_PYTHON_VERSION": "3",
+        "LD_LIBRARY_PATH": "/opt/ros/noetic/opt/rviz_ogre_vendor/lib:/opt/ros/noetic/lib/x86_64-linux-gnu:/opt/ros/noetic/lib",
+        "PYTHONPATH":"/opt/ros/noetic/local/lib/python3/dist-packages"
+    },
+    "runArgs": [
+        "--net=host",
+        "-e",
+        "DISPLAY=${env:DISPLAY}"
+    ],
+    "mounts": [
+        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
+        "source=/dev/dri,target=/dev/dri,type=bind,consistency=cached",
+        "source=vscode-${devcontainerId}-build,target=/ws/build,type=volume",
+        "source=vscode-${devcontainerId}-devel,target=/ws/log,type=volume",
+        "source=vscode-${devcontainerId}-install,target=/ws/install,type=volume",
+        "source=/home/jbinney/.config/bloom,target=/home/jbinney/.config/bloom,type=bind"
+    ],
+    "postCreateCommand": "sudo rosdep update && sudo rosdep install --from-paths . --ignore-src -y && sudo chown -R $(whoami) /ws"
+}
