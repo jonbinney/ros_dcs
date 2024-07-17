@@ -1,5 +1,5 @@
 {
-    "name": "ROS 2 Development Container (Ubuntu Focal)",
+    "name": "ROS2 Humble on Ubuntu Focal",
     "privileged": true,
     "remoteUser": "jbinney",
     "build": {
