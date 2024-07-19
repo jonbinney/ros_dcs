@@ -44,5 +44,5 @@
         "source=vscode-${devcontainerId}-log,target=/ws/log,type=volume",
         "source=/home/jbinney/.config/bloom,target=/home/jbinney/.config/bloom,type=bind"
     ],
-    "postCreateCommand": "sudo rosdep update && sudo rosdep install --from-paths . --ignore-src -y && sudo chown -R $(whoami) /ws"
+    "onCreateCommand": "sudo rosdep update && sudo rosdep install --from-paths . --ignore-src -y && sudo chown -R $(whoami) /ws"
 }

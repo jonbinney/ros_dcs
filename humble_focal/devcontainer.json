@@ -39,6 +39,6 @@
         "source=vscode-${devcontainerId}-log,target=/ws/log,type=volume",
         "source=/home/jbinney/.config/bloom,target=/home/jbinney/.config/bloom,type=bind"
     ],
-    "postCreateCommand": ". /opt/ros/humble/install/setup.sh && sudo rosdep update && sudo rosdep install --from-paths src --ignore-src -r -y && sudo chown -R $(whoami) /ws"
+    "onCreateCommand": ". /opt/ros/humble/install/setup.sh && sudo rosdep update && sudo rosdep install --from-paths src --ignore-src -r -y && sudo chown -R $(whoami) /ws"
 }
 
