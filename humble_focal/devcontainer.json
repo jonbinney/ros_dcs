@@ -9,7 +9,7 @@
             "USERNAME": "jbinney"
         }
     },
-    "workspaceFolder": "/ws",
+    "workspaceFolder": "/ws/src",
     "workspaceMount": "source=${localWorkspaceFolder},target=/ws/src,type=bind",
     "customizations": {
         "vscode": {
@@ -24,12 +24,14 @@
     "containerEnv": {
         "DISPLAY": "unix:0",
         "ROS_LOCALHOST_ONLY": "1",
-        "ROS_DOMAIN_ID": "42"
+        "SHELL": "/bin/bash"
     },
     "runArgs": [
         "--net=host",
         "-e",
-        "DISPLAY=${env:DISPLAY}"
+        "DISPLAY=${env:DISPLAY}",
+        "--env-file",
+        ".devcontainer/humble_focal/devcontainer.env"
     ],
     "mounts": [
         "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
@@ -39,6 +41,6 @@
         "source=vscode-${devcontainerId}-log,target=/ws/log,type=volume",
         "source=/home/jbinney/.config/bloom,target=/home/jbinney/.config/bloom,type=bind"
     ],
-    "onCreateCommand": ". /opt/ros/humble/install/setup.sh && sudo rosdep update && sudo rosdep install --from-paths src --ignore-src -r -y && sudo chown -R $(whoami) /ws"
+    "onCreateCommand": ". /opt/ros/humble_extra/install/setup.sh && rosdep update && rosdep install --from-paths src --ignore-src -r -y"
 }
 
