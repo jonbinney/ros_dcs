@@ -1,0 +1,44 @@
+{
+    "name": "ROS2 Jazzy on Ubuntu Noble",
+    "privileged": true,
+    "remoteUser": "jbinney",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {
+            "ROSDISTRO": "jazzy",
+            "USERNAME": "jbinney"
+        }
+    },
+    "workspaceFolder": "/ws/src",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/ws/src,type=bind",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.cpptools-themes",
+                "ms-vscode.cmake-tools",
+                "eamodio.gitlens"
+            ]
+        }
+    },
+    "containerEnv": {
+        "DISPLAY": "unix:0",
+        "ROS_LOCALHOST_ONLY": "1",
+    },
+    "runArgs": [
+        "--net=host",
+        "-e",
+        "DISPLAY=${env:DISPLAY}",
+        "--env-file",
+        ".devcontainer/jazzy_noble/devcontainer.env"
+    ],
+    "mounts": [
+        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
+        "source=/dev/dri,target=/dev/dri,type=bind,consistency=cached",
+        "source=vscode-${devcontainerId}-build,target=/ws/build,type=volume",
+        "source=vscode-${devcontainerId}-install,target=/ws/install,type=volume",
+        "source=vscode-${devcontainerId}-log,target=/ws/log,type=volume",
+        "source=/home/jbinney/.config/bloom,target=/home/jbinney/.config/bloom,type=bind"
+    ],
+    "onCreateCommand": "sudo rosdep update && sudo rosdep install --from-paths . --ignore-src -y && sudo chown -R $(whoami) /ws"
+}
