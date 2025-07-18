@@ -17,7 +17,8 @@
                 "ms-vscode.cpptools",
                 "ms-vscode.cpptools-themes",
                 "ms-vscode.cmake-tools",
-                "eamodio.gitlens"
+                "eamodio.gitlens",
+                "ms-vscode.cpptools-extension-pack"
             ]
         }
     },

@@ -28,6 +28,8 @@ RUN apt-get install -y python3-pip
 # catkin_prepare_release in ros2)
 RUN apt-get install -y python3-catkin-pkg python3-bloom
 
+RUN apt-get install -y gdb
+
 # There must be a better way to do this.... we source the setup.sh to get the environment variables we'll need, 
 # put them in a file, then we have to manually copy that file out of the container into the devcontainer folder
 # so that vscode can have docker load it at startup. All so that cmake_tools and any nodes we run in the container
