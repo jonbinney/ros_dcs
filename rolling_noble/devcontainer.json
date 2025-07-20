@@ -40,7 +40,8 @@
         "source=vscode-${devcontainerId}-build,target=/ws/build,type=volume",
         "source=vscode-${devcontainerId}-install,target=/ws/install,type=volume",
         "source=vscode-${devcontainerId}-log,target=/ws/log,type=volume",
-        "source=/home/jbinney/.config/bloom,target=/home/jbinney/.config/bloom,type=bind"
+        "source=/home/jbinney/.config/bloom,target=/home/jbinney/.config/bloom,type=bind",
+        "source=/home/jbinney/.ssh,target=/home/jbinney/.ssh,type=bind"
     ],
     "onCreateCommand": "sudo rosdep update && sudo rosdep install --from-paths . --ignore-src -y && sudo chown -R $(whoami) /ws"
 }
